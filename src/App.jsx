@@ -17,9 +17,13 @@ const STAGE_BADGE = {
 
 function AppInner() {
   const { state, toasts, activeAssortment } = useApp();
-  const [activeView, setActiveView] = useState('drive'); // 'drive' | 'shop' | 'grid' | 'doors' | 'settings'
+  const [activeView, setActiveView] = useState('drive');
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
-  const handleNavigate = (view) => setActiveView(view);
+  const handleNavigate = (view) => {
+    setActiveView(view);
+    setMobileSidebarOpen(false);
+  };
 
   const handleOpenAssortment = (id) => {
     setActiveView('grid');
@@ -40,12 +44,27 @@ function AppInner() {
 
   return (
     <div className="app-shell">
-      <Sidebar activeView={activeView} onNavigate={handleNavigate} />
+      <Sidebar
+        activeView={activeView}
+        onNavigate={handleNavigate}
+        mobileOpen={mobileSidebarOpen}
+        onMobileClose={() => setMobileSidebarOpen(false)}
+      />
 
       <div className="main-content">
         {/* Top Header */}
         <header className="top-header">
-          <div>
+          {/* Mobile menu button */}
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setMobileSidebarOpen(true)}
+            aria-label="Open navigation menu"
+            id="btn-mobile-menu"
+          >
+            ☰
+          </button>
+
+          <div className="top-header-info">
             {activeView === 'grid' && activeAssortment ? (
               <div className="top-header-breadcrumb">
                 <button
@@ -73,19 +92,13 @@ function AppInner() {
           <div className="top-header-actions">
             {activeView === 'grid' && activeAssortment && (
               <>
-                <span style={{fontSize:'var(--font-size-xs)',color:'var(--color-text-muted)'}}>
+                <span className="header-meta-info">
                   {activeAssortment.doors.length} doors · {activeAssortment.products.length} products
                 </span>
                 <button className="btn btn--secondary btn--sm" id="btn-export" onClick={() => alert('Export as CSV – coming soon!')} >📥 Export</button>
               </>
             )}
-            <div style={{
-              width:32,height:32,borderRadius:'50%',
-              background:'linear-gradient(135deg,hsl(258,85%,70%),hsl(174,72%,44%))',
-              display:'flex',alignItems:'center',justifyContent:'center',
-              fontSize:'var(--font-size-xs)',fontWeight:700,color:'white',cursor:'pointer',
-              boxShadow:'0 2px 8px rgba(0,0,0,0.3)',flexShrink:0
-            }}>AK</div>
+            <div className="header-avatar">AK</div>
           </div>
         </header>
 

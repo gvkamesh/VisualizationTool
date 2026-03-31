@@ -1,4 +1,4 @@
-// Mock Data for NuOrder-inspired Application
+// Mock Data for KameshOrder-inspired Application
 
 export const SEASONS = ['SS25', 'FW25', 'SS26', 'FW26'];
 export const CATEGORIES = ['Tops', 'Bottoms', 'Outerwear', 'Footwear', 'Accessories', 'Dresses'];
