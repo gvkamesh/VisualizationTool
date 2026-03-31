@@ -62,9 +62,9 @@ export default function Sidebar({ activeView, onNavigate }) {
       {/* Footer */}
       <div className="sidebar-footer">
         <div className="sidebar-user" role="button" tabIndex={0}>
-          <div className="sidebar-avatar" aria-hidden="true">AK</div>
+          <div className="sidebar-avatar" aria-hidden="true">KG</div>
           <div className="sidebar-user-info">
-            <div className="sidebar-user-name">Alex Kim</div>
+            <div className="sidebar-user-name">Kamesh Garimella</div>
             <div className="sidebar-user-role">Buying Manager</div>
           </div>
         </div>
